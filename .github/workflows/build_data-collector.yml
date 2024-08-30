@@ -1,0 +1,24 @@
+name: Build Container For data-collector
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build data-collector container
+      run: docker-compose up --build --exit-code-from data-collector
+
+    - name: Check the container failed to build
+      if: failure()
+      run: exit 1
