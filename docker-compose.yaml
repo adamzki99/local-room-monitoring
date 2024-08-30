@@ -1,0 +1,24 @@
+services:
+
+  db:
+    image: postgres:16.4
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/db/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: example
+  
+  data-collector:
+    image: golang:1.23
+    working_dir: /usr/src/app
+    volumes:
+      - ./base/data-collector:/usr/src/app
+    build:
+      context: ./base/data-collector
+      dockerfile: data-collector-dockerfile
+    command: /usr/local/bin/app
