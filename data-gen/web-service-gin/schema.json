@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "properties": {
+    "device_id": {
+      "type": "string",
+      "description": "Unique identifier for the edge device."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the data was recorded, in RFC3339 format."
+    },
+    "location": {
+      "type": "object",
+      "description": "Location information of the device.",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90,
+          "description": "Latitude of the device location."
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180,
+          "description": "Longitude of the device location."
+        },
+        "altitude": {
+          "type": "number",
+          "description": "Altitude of the device location in meters.",
+          "nullable": true
+        },
+        "room_id": {
+          "type": "string",
+          "description": "Optional identifier for the room or specific area where the device is located.",
+          "nullable": true
+        }
+      },
+      "required": ["latitude", "longitude"]
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Metrics recorded by the edge device.",
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "description": "Temperature in degrees Celsius.",
+          "minimum": -50,
+          "maximum": 150
+        },
+        "humidity": {
+          "type": "number",
+          "description": "Relative humidity as a percentage.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "air_quality_index": {
+          "type": "number",
+          "description": "Air quality index value.",
+          "minimum": 0,
+          "maximum": 500,
+          "nullable": true
+        },
+        "co2_levels": {
+          "type": "number",
+          "description": "CO2 levels in parts per million (ppm).",
+          "minimum": 0,
+          "nullable": true
+        },
+        "light_intensity": {
+          "type": "number",
+          "description": "Light intensity in lumens.",
+          "minimum": 0,
+          "nullable": true
+        },
+        "occupancy": {
+          "type": "boolean",
+          "description": "Whether the room is currently occupied.",
+          "nullable": true
+        }
+      },
+      "required": ["temperature", "humidity"]
+    },
+    "battery_level": {
+      "type": "number",
+      "description": "Battery level of the edge device as a percentage.",
+      "minimum": 0,
+      "maximum": 100,
+      "nullable": true
+    },
+    "signal_strength": {
+      "type": "number",
+      "description": "Signal strength of the edge device in dBm.",
+      "nullable": true
+    },
+    "firmware_version": {
+      "type": "string",
+      "description": "Firmware version of the edge device.",
+      "nullable": true
+    }
+  },
+  "required": ["device_id", "timestamp", "location", "metrics"]
+}
