@@ -113,16 +113,16 @@ func GetDataRecordingsFromDatabase(config DatabaseConfig) ([]DataRecording, erro
 
 		var rec DataRecording
 
-		if err := rows.Scan(&rec.DeviceID,
-			&rec.Timestamp,
-			&rec.Temperature,
-			&rec.Humidity,
-			&rec.AirQualityIndex,
-			&rec.CO2Levels,
-			&rec.LightIntensity,
-			&rec.Occupancy,
-			&rec.SignalStrength,
-			&rec.BatteryLevel); err != nil {
+		if err := rows.Scan(rec.DeviceID,
+			rec.Timestamp,
+			rec.Temperature,
+			rec.Humidity,
+			rec.AirQualityIndex,
+			rec.CO2Levels,
+			rec.LightIntensity,
+			rec.Occupancy,
+			rec.SignalStrength,
+			rec.BatteryLevel); err != nil {
 
 			connection.closeDatabaseConnection()
 			return dataRecordings, err
@@ -229,10 +229,10 @@ func WriteDeviceToDatabase(config DatabaseConfig, device *Device) (sql.Result, e
 	// TODO: change to a prepared statement to avoid sql-injection
 	query := fmt.Sprintf("INSERT INTO %s.devices (device_id, room_id, firmware_version, address) values ('%s', '%s', '%s', '%s')",
 		config.Schema,
-		&device.DeviceID,
-		&device.RoomID,
-		&device.FirmwareVersion,
-		&device.Address,
+		device.DeviceID,
+		device.RoomID,
+		device.FirmwareVersion,
+		device.Address,
 	)
 
 	result, err := connection.exec(query)
@@ -300,10 +300,10 @@ func WriteLocationToDatabase(config DatabaseConfig, location *Location) (sql.Res
 	// TODO: change to a prepared statement to avoid sql-injection
 	query := fmt.Sprintf("INSERT INTO %s.locations (room_id, latitude, longitude, altitude) values ('%s', %f, %f, %f)",
 		config.Schema,
-		&location.RoomID,
-		&location.Latitude,
-		&location.Longitude,
-		&location.Altitude,
+		location.RoomID,
+		location.Latitude,
+		location.Longitude,
+		location.Altitude,
 	)
 
 	result, err := connection.exec(query)
