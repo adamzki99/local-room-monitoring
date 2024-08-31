@@ -12,7 +12,7 @@ Small project using a database and some micro-controllers to store and display t
 - [ ] Cleanup...
 - [ ] Improve code test coverage
 - [ ] Setup more Github actions:
-  - [ ] SonarCloud
+  - [x] SonarCloud
   - [ ] CodeSene
   - [ ] etc.
 - [ ] Add documentation
