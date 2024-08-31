@@ -2,6 +2,8 @@ name: Go Lint
 
 on:
   pull_request:
+    paths:
+      - "**.go"
     branches:
       - main
 
