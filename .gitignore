@@ -26,3 +26,6 @@ go.work.sum
 
 # sql files
 *.sql
+
+# grafana files
+*/grafana/datasource.yaml
