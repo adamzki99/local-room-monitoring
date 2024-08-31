@@ -1,0 +1,33 @@
+name: Build and Test data-collector
+
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+
+on:
+  push:
+    paths:
+      - "./base/data_collector/**/**.go"
+    branches: [ "main" ]
+  pull_request:
+    paths:
+      - "./base/data_collector/**/**.go"
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
+
+    - name: Build
+      working-directory: ./base/data_collector/src
+      run: go build -v .
+
+    - name: Test
+      working-directory: ./base/data_collector/src
+      run: go test -v .
