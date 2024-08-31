@@ -11,22 +11,12 @@
             "id": "e7d393dd5d01e699",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
-            }
-          }
-        ]
-      },
-      {
-        "id": "8eab204b1df52aaf",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "01a0e6476562a2e5",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "password-sensitive-files.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -95,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "password-sensitive-files.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "password-sensitive-files.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Welcome.md"
+                "file": "password-sensitive-files.md"
               }
             }
           }
@@ -154,8 +146,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "cc3f24af56c6628b",
+  "active": "e7d393dd5d01e699",
   "lastOpenFiles": [
+    "password-sensitive-files.md",
     "Welcome.md"
   ]
 }

@@ -8,7 +8,6 @@ import (
 
 	dbwrapper "github.com/adamzki99/local-room-monitoring/base/data-collector/src/packages"
 	"github.com/go-zoox/fetch"
-	"github.com/spf13/viper"
 )
 
 type properties struct {
@@ -95,16 +94,13 @@ func ExtractProperties(prop *properties) (dbwrapper.DataRecording, dbwrapper.Dev
 
 func main() {
 
-	// read env-variables for the database connection
-	viper.SetConfigFile(".env")
-	viper.ReadInConfig()
-
-	databaseConfig := dbwrapper.DatabaseConfig{Host: viper.GetString("DATABASE_HOST"),
-		Port:     viper.GetString("DATABASE_PORT"),
-		User:     viper.GetString("DATABASE_USER"),
-		Password: viper.GetString("DATABASE_PASSWORD"),
-		Name:     viper.GetString("DATABASE_NAME"),
-		Schema:   viper.GetString("DATABASE_SCHEMA"),
+	// read env variables for the database connection
+	databaseConfig := dbwrapper.DatabaseConfig{Host: os.Getenv("DATABASE_HOST"),
+		Port:     os.Getenv("DATABASE_PORT"),
+		User:     os.Getenv("DATABASE_USER"),
+		Password: os.Getenv("DATABASE_PASSWORD"),
+		Name:     os.Getenv("DATABASE_NAME"),
+		Schema:   os.Getenv("DATABASE_SCHEMA"),
 	}
 
 	devices, err := dbwrapper.GetDevicesFromDatabase(databaseConfig)
