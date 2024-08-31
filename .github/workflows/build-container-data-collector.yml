@@ -1,9 +1,14 @@
 name: Build Container For data-collector
 
 on:
+  push:
+    paths:
+      - "./base/data_collector/**/**.go"
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    paths:
+      - "./base/data_collector/**/**.go"
+    branches: [ "main" ]
 
 jobs:
   build:
