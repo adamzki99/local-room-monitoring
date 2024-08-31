@@ -1,0 +1,18 @@
+# Using latest version officially supported by grafana
+FROM postgres:15
+
+# Set environment variables for PostgreSQL using the ARG values
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_DB=${POSTGRES_DB}
+
+# Copy SQL files to the Docker image
+COPY init.sql /docker-entrypoint-initdb.d/
+COPY data.sql /docker-entrypoint-initdb.d/
+
+# Expose the default PostgreSQL port
+EXPOSE 5432
+
+# The default command to run PostgreSQL
+CMD ["postgres"]
+

@@ -1,0 +1,19 @@
+apiVersion: 1
+
+datasources:
+  - name: lrm-postgres
+    type: postgres
+    url: lrm-postgres:5432
+    user: grafanareader
+    secureJsonData:
+      password: 'password'
+    jsonData:
+      database: opulence
+      sslmode: 'disable'
+      maxOpenConns: 100
+      maxIdleConns: 100
+      maxIdleConnsAuto: true
+      connMaxLifetime: 14400
+      postgresVersion: 1500
+      timescaledb: false
+
