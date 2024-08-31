@@ -5,6 +5,8 @@ Small project using a database and some micro-controllers to store and display t
 
 ## TODO
 
+- [ ] Add Graphana
+- [ ] Add Prometheus
 - [ ] Change so that the database is built with a script so that all schemas are set automatically
 - [ ] Change the database writes to make them safe from SQL injections
 - [ ] Add edge device implementation
