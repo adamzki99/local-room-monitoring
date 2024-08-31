@@ -1,18 +1,30 @@
 #!/bin/bash
 
-# Load the environment variables from the .env file
-export $(grep -v '^#' .env | xargs)
+# Exit script on any error
+set -e
 
-# Set the file location for datasource.yaml 
-fileLocation="$(pwd)/grafana/datasource.yaml"
+# Load environment variables from the .env file
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+else
+  echo ".env file not found!"
+  exit 1
+fi
 
-# Remove file if old instance already exists
-rm $fileLocation
+# Define the file location for datasource.yaml 
+file_location="$(pwd)/grafana/datasource.yaml"
 
-# Create the datasource.yaml file
-touch $fileLocation
+# Remove old file if it exists
+if [ -f "$file_location" ]; then
+  rm "$file_location"
+fi
 
-output_string="apiVersion: 1
+# Create a new datasource.yaml file
+touch "$file_location"
+
+# Prepare the output string
+output_string=$(cat <<EOF
+apiVersion: 1
 
 datasources:
   - name: lrm-postgres
@@ -29,11 +41,12 @@ datasources:
       maxIdleConnsAuto: true
       connMaxLifetime: 14400
       postgresVersion: 1500
-      timescaledb: false"
+      timescaledb: false
+EOF
+)
 
-echo "$output_string" >> "$fileLocation"
-echo "" >> "$fileLocation" 
-
+# Write the output string to the file
+echo "$output_string" > "$file_location"
 
 # Print a message indicating success
-echo "Created file datasource.yaml in directory $(pwd)/database/"
+echo "Created file datasource.yaml in directory $(pwd)/grafana/"
